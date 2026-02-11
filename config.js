@@ -1,0 +1,2 @@
+export const API_URL = 'https://script.google.com/macros/s/AKfycbwGkSqFYy7xEfC48L_ZA3dV-qvBWTbIpPHkdHPbcq_PYmiypAz4PPfaoRlnRnNbn5Te7g/exec';
+export const WRITE_KEY = '91e953df97faaecec326f82ce8ecbe19';

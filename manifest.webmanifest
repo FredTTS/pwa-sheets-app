@@ -1,0 +1,9 @@
+{
+ "name": "TempLogg",
+ "short_name": "Temp",
+ "start_url": ".",
+ "display": "standalone",
+ "background_color": "#111",
+ "theme_color": "#0b6cf0",
+ "icons": []
+}

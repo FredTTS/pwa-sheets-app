@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Temperatur-logg</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header><h1>Temperatur-logg</h1></header>
+<main>
+<section class="card">
+<h2>Datum</h2>
+<input id="dateInput" type="date" />
+<button id="loadBtn">Hämta</button>
+</section>
+<section class="card">
+<h2>Rum</h2>
+<form id="tempForm"><div class="grid" id="grid"></div>
+<button type="submit">Spara</button>
+<span id="saveStatus"></span>
+</form>
+</section>
+<section class="card">
+<h2>Export</h2>
+<input id="exportStart" type="date" />
+<input id="exportEnd" type="date" />
+<button id="exportBtn">Exportera Excel</button>
+<span id="exportStatus"></span>
+</section>
+<section class="card">
+<h2>Senaste</h2>
+<table><tbody id="recentBody"></tbody></table>
+</section>
+</main>
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<script type="module" src="config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
