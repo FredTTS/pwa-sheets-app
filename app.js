@@ -1,4 +1,6 @@
-import {API_URL, WRITE_KEY} from './config.js';
+const cfg = typeof window !== 'undefined' && window.APP_CONFIG;
+const API_URL = (cfg && cfg.API_URL) || '';
+const WRITE_KEY = (cfg && cfg.WRITE_KEY) || '';
 
 // #region agent log
 const _log=(msg,data,hyp)=>{fetch('http://127.0.0.1:7242/ingest/40acdcfb-0a09-4395-86e9-04384e22ff2a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app.js',message:msg,data:data||{},timestamp:Date.now(),hypothesisId:hyp})}).catch(()=>{});};
@@ -19,18 +21,33 @@ function q(id){return document.getElementById(id);}
 
 function init() {
  const grid=q('grid');
+ const tempForm=q('tempForm');
+ const readyEl=q('appReady');
  // #region agent log
- _log('app init',{hasGrid:!!grid,hasTempForm:!!q('tempForm'),hasDateInput:!!q('dateInput'),readyState:document.readyState},'init');
+ _log('app init',{hasGrid:!!grid,hasTempForm:!!tempForm,hasConfig:!!cfg,readyState:document.readyState},'init');
  // #endregion
- if (!grid) { console.error('Element #grid hittades inte.'); return; }
+ if (!cfg || !API_URL) {
+  if (readyEl) readyEl.textContent = ' (konfiguration saknas)';
+  console.error('APP_CONFIG saknas eller API_URL tom.');
+  return;
+ }
+ if (!grid) {
+  if (readyEl) readyEl.textContent = ' (#grid saknas)';
+  console.error('Element #grid hittades inte.');
+  return;
+ }
  ROOMS.forEach(r=>{
   const div=document.createElement('div');
   div.innerHTML=`<label>${r.name}</label><input type="number" id="${r.id}" step="0.1">`;
   grid.appendChild(div);
  });
 
- const tempForm=q('tempForm');
- if (!tempForm) { console.error('Element #tempForm hittades inte.'); return; }
+ if (!tempForm) {
+  if (readyEl) readyEl.textContent = ' (#tempForm saknas)';
+  console.error('Element #tempForm hittades inte.');
+  return;
+ }
+ if (readyEl) readyEl.textContent = '· redo';
  tempForm.addEventListener('submit',async e=>{
  e.preventDefault();
  const statusEl=q('saveStatus');

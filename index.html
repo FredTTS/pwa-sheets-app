@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header><h1>Temperatur-logg</h1></header>
+<header><h1>Temperatur-logg <span id="appReady" aria-hidden="true"></span></h1></header>
 <main>
 <section class="card">
 <h2>Datum</h2>
@@ -35,7 +35,12 @@
 </section>
 </main>
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-<script type="module" src="config.js"></script>
+<script>
+window.APP_CONFIG={
+  API_URL:'https://script.google.com/macros/s/AKfycbwGkSqFYy7xEfC48L_ZA3dV-qvBWTbIpPHkdHPbcq_PYmiypAz4PPfaoRlnRnNbn5Te7g/exec',
+  WRITE_KEY:'91e953df97faaecec326f82ce8ecbe19'
+};
+</script>
 <script type="module" src="app.js"></script>
 </body>
 </html>
