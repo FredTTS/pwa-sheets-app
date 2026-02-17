@@ -84,7 +84,11 @@ function init() {
   // #region agent log
   _log('submit error',{name:err.name,message:err.message},'A,D');
   // #endregion
-  if (statusEl) statusEl.textContent='Fel: '+err.message;
+  const msg = err.message || '';
+  const isCors = /fetch|network|cors/i.test(msg);
+  if (statusEl) statusEl.textContent = isCors
+    ? 'Fel: Anrop blockerat (CORS). Lägg till CORS-huvud i Google Apps Script – se GOOGLE_APPS_SCRIPT_CORS.md.'
+    : 'Fel: ' + msg;
  }
  });
 
